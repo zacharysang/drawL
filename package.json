@@ -5,6 +5,7 @@
     "dependencies": {
         "webpack": "^4.15.0",
         "webpack-cli": "^3.0.8",
-        "antlr4": "^4.7.1"
+        "antlr4": "^4.7.1",
+        "uglifyjs-webpack-plugin": "^1.2.7"
     }
 }
