@@ -6,10 +6,10 @@ const DrawLParser = require('../target/generated-sources/antlr4/com/zacharysang/
 let DrawLListener = require('../target/generated-sources/antlr4/com/zacharysang/DrawL/DrawLListener.js').DrawLListener;
 
 // make a constructor that inherits from the generated listener
-theDrawLListener = function(scratch) {
+function theDrawLListener(canvas) {
     
-    // feel free to add to theDrawLListener here
-    this.scratch = scratch;
+    this.canvas = canvas;
+    this.streaks = [];
     
     // inherit from the generated listener
     DrawLListener.call(this);
@@ -19,9 +19,25 @@ theDrawLListener = function(scratch) {
 
 // assign inherited behavior
 theDrawLListener.prototype = Object.create(DrawLListener.prototype);
-theDrawLListener.prototype.constructor = theDrawLListeneer;
+theDrawLListener.prototype.constructor = theDrawLListener;
 
-// override the listener functions
-theDrawLListener.prototype.enterStreak = function (ctx) {
-    console.log(JSON.stringify(stx));
+// override the listener functions (there is a listener for each parser rule)
+
+// each streak should handle initializing a new drawing line
+theDrawLListener.prototype.exitStreak = function (ctx) {
+    
+    console.log('printing streak info:');
+    console.log(ctx.location().getText());    
+    
+    // get the location
+    
+    this.canvas.beginPath();
+    //this.canvas.moveTo()
 };
+
+theDrawLListener.prototype.enterLocation = function(ctx) {
+}
+
+
+
+exports.theDrawLListener = theDrawLListener

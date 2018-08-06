@@ -1,5 +1,7 @@
-target
-
 # node files
 node_modules
 node
+
+# built files
+webapp
+target
