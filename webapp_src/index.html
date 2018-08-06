@@ -1,13 +1,28 @@
 <html>
     <head>
         <style>
+            .content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            [type='textarea'] {
+                height: 100px;
+                width: 300px;
+            }
+            
             canvas {
                 border: 1px dashed black;
+                margin: 10px;
             }
         </style>
     </head>
     <body>
-        <div>
+        <div class="content">
+            <input type="textarea" id="drawL_input">
+            </input>
+            <input type="button" value="Compile" id="drawL_compile"></input>
             <canvas id="test_canvas" width="500px" height="500px">
             </canvas>
             <script src="/api/project/file/drawL/webapp/main.js"></script>

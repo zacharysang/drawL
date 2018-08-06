@@ -4,9 +4,15 @@ const DrawLParser = require('../target/generated-sources/antlr4/com/zacharysang/
 const theDrawLListener = require('./theDrawLListener.js').theDrawLListener;
 
 const CANVAS_ID = 'test_canvas';
+const INPUT_ID = 'drawL_input';
+const COMPILE_ID = 'drawL_compile';
 
 // get the input
-let input = 'streak [1,0]';
+let inputEl = document.getElementById(INPUT_ID);
+
+// set the change handler
+let compileButton = document.getElementById(COMPILE_ID);
+compileButton.onclick = () => {compile(inputEl.value)}
 
 // initialize the canvas handles
 let canvas = document.getElementById(CANVAS_ID);
@@ -15,14 +21,16 @@ if (canvas.getContext) {
     canvasCtx = canvas.getContext('2d');
 }
 
-let chars = new antlr.InputStream(input);
-let lexer = new DrawLLexer.DrawLLexer(chars);
-let tokens = new antlr.CommonTokenStream(lexer);
-let parser = new DrawLParser.DrawLParser(tokens);
+function compile(input) {
+    let chars = new antlr.InputStream(input);
+    let lexer = new DrawLLexer.DrawLLexer(chars);
+    let tokens = new antlr.CommonTokenStream(lexer);
+    let parser = new DrawLParser.DrawLParser(tokens);
 
-parser.buildParseTrees = true;
+    parser.buildParseTrees = true;
 
-let tree = parser.streak();
-let listener = new theDrawLListener(canvasCtx);
-antlr.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+    let tree = parser.streak();
+    let listener = new theDrawLListener(canvasCtx);
+    antlr.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+}
 
