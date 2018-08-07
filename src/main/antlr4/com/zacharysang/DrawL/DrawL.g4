@@ -9,7 +9,7 @@ A streak will be defined by a starting point and then a pattern of succession
 /* Parser rules */
 streak : STREAK_KW location tvec*;
 location : OPEN_BRACKET NUMBER COMMA NUMBER CLOSE_BRACKET;
-tvec : DELIM NUMBER DASH NUMBER DASH NUMBER; // <magnitude>-<angle>-<iterations>
+tvec : DELIM NUMBER DASH NUMBER DASH NUMBER; // <iterations>-<angle>-<magnitude>
 
 /* Lexer rules */
 // primitive values

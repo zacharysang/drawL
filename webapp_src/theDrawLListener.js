@@ -34,20 +34,28 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
     this.canvas.beginPath();
     this.canvas.moveTo(x,y);
     
-    
     let newX = x;
     let newY = y;
     
     // draw based on tvecs
     let tvecs = ctx.tvec();
+    
+    // loop through all tvecs in the streak
     for (idx in tvecs) {
         let tvec = tvecs[idx];
+        let it = tvec.NUMBER()[0];
         
-        let magnitude = tvec.NUMBER()[0];
-        let angle = (Math.PI * tvec.NUMBER()[1]) / 180;
-        let it = tvec.NUMBER()[2];
-        
+        let angle = 0;
+        let magnitude = 1;
+    
+        // loop through all iterations of this tvec
         for (let i = 0; i < it; i++) {
+            
+            // convert the angle given in degrees into radians
+            let angleDeg = tvec.NUMBER()[1];
+            angle += (Math.PI * angleDeg) / 180;
+            
+            magnitude = tvec.NUMBER()[2];
             
             newX += (Math.cos(angle) * magnitude);
             newY += (Math.sin(angle) * magnitude);
@@ -55,7 +63,7 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
             this.canvas.lineTo(newX, newY);    
             this.canvas.moveTo(newX, newY);
             
-            this.canvas.lineWidth = 2;
+            this.canvas.lineWidth = 1;
             this.canvas.stroke();
         }
     }
