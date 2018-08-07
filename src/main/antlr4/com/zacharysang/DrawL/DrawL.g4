@@ -15,7 +15,7 @@ tvec : DELIM NUMBER DASH NUMBER DASH NUMBER; // <magnitude>-<angle>-<iterations>
 // primitive values
 TRUE : 'true';
 FALSE : 'false';
-NUMBER : [0-9]+; // one day we hope to support decimals...(but since the unit is pixels, this should be precise enough for now)
+NUMBER : [1-9][0-9]*; // one day we hope to support decimals...(but since the unit is pixels, this should be precise enough for now)
 
 STREAK_KW : 'streak';
 

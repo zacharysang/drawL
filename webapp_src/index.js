@@ -6,6 +6,14 @@ const theDrawLListener = require('./theDrawLListener.js').theDrawLListener;
 const CANVAS_ID = 'test_canvas';
 const INPUT_ID = 'drawL_input';
 const COMPILE_ID = 'drawL_compile';
+const CLEAR_ID = 'drawL_clear';
+
+// initialize the canvas handles
+let canvas = document.getElementById(CANVAS_ID);
+let canvasCtx;
+if (canvas.getContext) {
+    canvasCtx = canvas.getContext('2d');
+}
 
 // get the input
 let inputEl = document.getElementById(INPUT_ID);
@@ -14,12 +22,11 @@ let inputEl = document.getElementById(INPUT_ID);
 let compileButton = document.getElementById(COMPILE_ID);
 compileButton.onclick = () => {compile(inputEl.value)}
 
-// initialize the canvas handles
-let canvas = document.getElementById(CANVAS_ID);
-let canvasCtx;
-if (canvas.getContext) {
-    canvasCtx = canvas.getContext('2d');
-}
+// set the clear button
+let clearButton = document.getElementById(CLEAR_ID);
+clearButton.onclick = () => {canvasCtx.clearRect(0,0,canvas.width, canvas.height)}
+
+
 
 function compile(input) {
     let chars = new antlr.InputStream(input);

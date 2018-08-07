@@ -7,7 +7,7 @@
                 align-items: center;
             }
             
-            [type='textarea'] {
+            textarea {
                 height: 100px;
                 width: 300px;
             }
@@ -20,9 +20,9 @@
     </head>
     <body>
         <div class="content">
-            <input type="textarea" id="drawL_input">
-            </input>
-            <input type="button" value="Compile" id="drawL_compile"></input>
+            <textarea  id="drawL_input"></textarea>
+            <input type="button" value="Compile" id="drawL_compile"/>
+            <input type="button" value="Clear" id="drawL_clear"/>
             <canvas id="test_canvas" width="500px" height="500px">
             </canvas>
             <script src="/api/project/file/drawL/webapp/main.js"></script>

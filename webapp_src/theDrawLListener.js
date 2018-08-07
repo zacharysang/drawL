@@ -25,15 +25,44 @@ theDrawLListener.prototype.constructor = theDrawLListener;
 
 // each streak should handle initializing a new drawing line
 theDrawLListener.prototype.exitStreak = function (ctx) {
-    
-    console.log('printing streak info:');
-    console.log(ctx.location().getText());    
-    
+        
     // get the location
+    let coords = ctx.location().NUMBER();
+    let x = parseInt(coords[0].getText());
+    let y = parseInt(coords[1].getText());
     
     this.canvas.beginPath();
-    //this.canvas.moveTo()
+    this.canvas.moveTo(x,y);
+    
+    
+    let newX = x;
+    let newY = y;
+    
+    // draw based on tvecs
+    let tvecs = ctx.tvec();
+    for (idx in tvecs) {
+        let tvec = tvecs[idx];
+        
+        let magnitude = tvec.NUMBER()[0];
+        let angle = (Math.PI * tvec.NUMBER()[1]) / 180;
+        let it = tvec.NUMBER()[2];
+        
+        for (let i = 0; i < it; i++) {
+            
+            newX += (Math.cos(angle) * magnitude);
+            newY += (Math.sin(angle) * magnitude);
+            
+            this.canvas.lineTo(newX, newY);    
+            this.canvas.moveTo(newX, newY);
+            
+            this.canvas.lineWidth = 2;
+            this.canvas.stroke();
+        }
+    }
+    
+    this.canvas.closePath();    
 };
+
 
 theDrawLListener.prototype.enterLocation = function(ctx) {
 }
