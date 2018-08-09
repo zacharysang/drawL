@@ -9,7 +9,6 @@ let DrawLListener = require('../target/generated-sources/antlr4/com/zacharysang/
 function theDrawLListener(canvas) {
     
     this.canvas = canvas;
-    this.streaks = [];
     
     // inherit from the generated listener
     DrawLListener.call(this);
@@ -47,6 +46,16 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
         
         let angle = 0;
         let magnitude = 1;
+        
+        // set up styling
+        if (tvec.style()) {
+            let style = tvec.style();
+            this.canvas.lineWidth = style.NUMBER() || 1;
+            this.canvas.strokeStyle = style.COLOR() || '#000000';
+        } else {
+            this.canvas.lineWidth = 1;
+            this.canvas.strokeStyle = '#000000';
+        }
     
         // loop through all iterations of this tvec
         for (let i = 0; i < it; i++) {
@@ -63,7 +72,6 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
             this.canvas.lineTo(newX, newY);    
             this.canvas.moveTo(newX, newY);
             
-            this.canvas.lineWidth = 1;
             this.canvas.stroke();
         }
     }
