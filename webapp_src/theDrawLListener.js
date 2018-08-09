@@ -43,7 +43,7 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
     // loop through all tvecs in the streak
     for (idx in tvecs) {
         let tvec = tvecs[idx];
-        let it = tvec.NUMBER()[0];
+        let it = tvec.NUMBER()[2] || 1;
         
         let angle = 0;
         let magnitude = 1;
@@ -52,10 +52,10 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
         for (let i = 0; i < it; i++) {
             
             // convert the angle given in degrees into radians
-            let angleDeg = tvec.NUMBER()[1];
+            let angleDeg = tvec.NUMBER()[0];
             angle += (Math.PI * angleDeg) / 180;
             
-            magnitude = tvec.NUMBER()[2];
+            magnitude = tvec.NUMBER()[1];
             
             newX += (Math.cos(angle) * magnitude);
             newY += (Math.sin(angle) * magnitude);

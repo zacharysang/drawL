@@ -9,12 +9,10 @@ A streak will be defined by a starting point and then a pattern of succession
 /* Parser rules */
 streak : STREAK_KW location tvec*;
 location : OPEN_BRACKET NUMBER COMMA NUMBER CLOSE_BRACKET;
-tvec : DELIM NUMBER DASH NUMBER DASH NUMBER; // <iterations>-<angle>-<magnitude>
+tvec : DELIM NUMBER DASH NUMBER (DASH NUMBER)?; // <angle>-<magnitude>-<iterations>
 
 /* Lexer rules */
 // primitive values
-TRUE : 'true';
-FALSE : 'false';
 NUMBER : [1-9][0-9]*; // one day we hope to support decimals...(but since the unit is pixels, this should be precise enough for now)
 
 STREAK_KW : 'streak';
