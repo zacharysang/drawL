@@ -36,7 +36,7 @@ function compile(input) {
 
     parser.buildParseTrees = true;
 
-    let tree = parser.streak();
+    let tree = parser.drawing();
     let listener = new theDrawLListener(canvasCtx);
     antlr.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 }
