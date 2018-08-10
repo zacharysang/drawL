@@ -21,10 +21,14 @@ theDrawLListener.prototype.constructor = theDrawLListener;
 
 // override the listener functions (there is a listener for each parser rule)
 
-// each streak should handle initializing a new drawing line
-theDrawLListener.prototype.enterStreak = function(streak) {
+// top level parser rule
+theDrawLListener.prototype.enterDrawing = function(drawing) {
+    
     this.variables = {};
-        
+}
+
+// each streak should handle initializing a new drawing line
+theDrawLListener.prototype.enterStreak = function(streak) {        
     // get the location
     let coords = streak.location().NUMBER();
     this.x = parseInt(coords[0].getText());
@@ -37,7 +41,8 @@ theDrawLListener.prototype.exitStreak = function(streak) {
     this.canvas.closePath();    
 };
 
-theDrawLListener.prototype.exitTvec = function(tvec) {
+// a tvec is a section of a streak with numerous segments
+theDrawLListener.prototype.enterTvec = function(tvec) {
     let it = tvec.NUMBER() || 1;
         
     let angle = 0;
@@ -64,11 +69,13 @@ theDrawLListener.prototype.exitTvec = function(tvec) {
     }
 };
 
+// declare the style of a tvec
 theDrawLListener.prototype.enterStyle = function(style) {
     this.canvas.lineWidth = style.NUMBER() || 1;
     this.canvas.strokeStyle = style.COLOR() || '#000000';
 };
 
+// declare variables to be used in a drawing
 theDrawLListener.prototype.enterDeclaration = function(declaration) {
     this.variables[declaration.VAR().getText()] = [];
     let start = declaration.NUMBER()[0];

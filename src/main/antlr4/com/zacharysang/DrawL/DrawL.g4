@@ -7,10 +7,10 @@ A streak will be defined by a starting point and then a pattern of succession
 */
 
 /* Parser rules */
-drawing : (streak DELIM)+;
+drawing : (declaration)* (streak DELIM)+;
 streak : STREAK_KW location tvec*;
 location : OPEN_PAREN NUMBER COMMA NUMBER CLOSE_PAREN;
-tvec : COLON value DASH value (DASH NUMBER)? (declaration)* (style)?; // <angle>-<magnitude>-<iterations>
+tvec : COLON value DASH value (DASH NUMBER)? (style)?; // <angle>-<magnitude>(-<iterations>)?
 declaration : OPEN_CURL VAR PIPE NUMBER ELLIPSIS NUMBER CLOSE_CURL;
 style : OPEN_ANGLE COLOR (COMMA NUMBER)? CLOSE_ANGLE;
 value : (VAR|NUMBER);
