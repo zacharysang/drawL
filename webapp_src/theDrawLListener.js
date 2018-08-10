@@ -44,7 +44,7 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
     for (idx in tvecs) {
         let tvec = tvecs[idx];
             
-        let it = tvec.NUMBER()[2] || 1;
+        let it = tvec.NUMBER() || 1;
         
         let angle = 0;
         let magnitude = 1;
@@ -66,9 +66,18 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
                 let dec = declaration[idx];
                 
                 this.variables[dec.VAR().getText()] = [];
-                for (let i = dec.NUMBER()[0]; i < dec.NUMBER()[1]; i++) {
-                    this.variables[dec.VAR()].push(i);
+                let start = dec.NUMBER()[0];
+                let end = dec.NUMBER()[1];
+                if (start < end) {
+                    for (let i = start; i < end; i++) {
+                        this.variables[dec.VAR().getText()].push(i);
+                    }
+                } else {
+                    for (let i = start; i > end; i--) {
+                        this.variables[dec.VAR().getText()].push(i);
+                    }
                 }
+                
             }
         }
     
