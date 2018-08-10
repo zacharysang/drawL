@@ -24,6 +24,7 @@ theDrawLListener.prototype.constructor = theDrawLListener;
 
 // each streak should handle initializing a new drawing line
 theDrawLListener.prototype.exitStreak = function (ctx) {
+    this.variables = {};
         
     // get the location
     let coords = ctx.location().NUMBER();
@@ -42,6 +43,7 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
     // loop through all tvecs in the streak
     for (idx in tvecs) {
         let tvec = tvecs[idx];
+            
         let it = tvec.NUMBER()[2] || 1;
         
         let angle = 0;
@@ -56,15 +58,30 @@ theDrawLListener.prototype.exitStreak = function (ctx) {
             this.canvas.lineWidth = 1;
             this.canvas.strokeStyle = '#000000';
         }
+        
+        // set up declarations if any on tvec
+        let declaration = tvec.declaration();
+        if(declaration) {
+            for (let idx in declaration) {
+                let dec = declaration[idx];
+                
+                this.variables[dec.VAR().getText()] = [];
+                for (let i = dec.NUMBER()[0]; i < dec.NUMBER()[1]; i++) {
+                    this.variables[dec.VAR()].push(i);
+                }
+            }
+        }
     
         // loop through all iterations of this tvec
         for (let i = 0; i < it; i++) {
             
             // convert the angle given in degrees into radians
-            let angleDeg = tvec.NUMBER()[0];
+            let angleVal = tvec.value()[0];
+            let angleDeg = angleVal.VAR() ? this.variables[angleVal.VAR().getText()].shift() : angleVal.NUMBER();
             angle += (Math.PI * angleDeg) / 180;
             
-            magnitude = tvec.NUMBER()[1];
+            let magnitudeVal = tvec.value()[1];
+            magnitude = magnitudeVal.VAR() ? this.variables[angleVal.VAR().getText()].shift() : magnitudeVal.NUMBER();
             
             newX += (Math.cos(angle) * magnitude);
             newY += (Math.sin(angle) * magnitude);
