@@ -52,12 +52,10 @@ theDrawLListener.prototype.enterTvec = function(tvec) {
     for (let i = 0; i < it; i++) {
             
         // convert the angle given in degrees into radians
-        let angleVal = tvec.value()[0];
-        let angleDeg = angleVal.VAR() ? this.variables[angleVal.VAR().getText()].shift() : angleVal.NUMBER();
+        let angleDeg = this.getValueStr(tvec.value()[0]);
         angle += (Math.PI * angleDeg) / 180;
             
-        let magnitudeVal = tvec.value()[1];
-        magnitude = magnitudeVal.VAR() ? this.variables[angleVal.VAR().getText()].shift() : magnitudeVal.NUMBER();
+        magnitude = this.getValueStr(tvec.value()[1]);
             
         this.x += Math.cos(angle) * magnitude;
         this.y += Math.sin(angle) * magnitude;
@@ -90,5 +88,9 @@ theDrawLListener.prototype.enterDeclaration = function(declaration) {
         }
     }
 };
+
+theDrawLListener.prototype.getValueStr = function(value) {
+    return value.VAR() ? this.variables[value.VAR().getText()].shift() : value.NUMBER();
+}
 
 exports.theDrawLListener = theDrawLListener;
