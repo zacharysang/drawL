@@ -3,7 +3,6 @@
 //
 
 function enter(drawing) {
-    console.log('entered a drawing')
     this.variables = {};
 }
 
