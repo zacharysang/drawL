@@ -8,9 +8,9 @@ A streak will be defined by a starting point and then a pattern of succession
 
 /* Parser rules */
 drawing : (declaration)* (streak DELIM)+;
-streak : STREAK_KW location tvec*;
+streak : STREAK_KW location section*;
 location : OPEN_PAREN NUMBER COMMA NUMBER CLOSE_PAREN;
-tvec : COLON value DASH value (DASH NUMBER)? (style)?; // <angle>-<magnitude>(-<iterations>)?
+section : COLON value DASH value (DASH NUMBER)? (style)?; // <angle>-<magnitude>(-<iterations>)?
 declaration : OPEN_CURL VAR PIPE NUMBER ELLIPSIS NUMBER CLOSE_CURL;
 style : OPEN_ANGLE COLOR (COMMA NUMBER)? CLOSE_ANGLE;
 value : (VAR|NUMBER);
