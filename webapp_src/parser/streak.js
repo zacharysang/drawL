@@ -2,7 +2,13 @@
 // represents a line starting at a 
 //
 
-function enter(streak) {        
+function enter(streak) {
+    // initialize variables for this streak
+    this.streakVars = {};
+    for (let v in this.variables) {
+        this.streakVars[v] = [...this.variables[v]];
+    }
+    
     // get the location
     let coords = streak.location().NUMBER();
     this.x = parseInt(coords[0].getText());
@@ -10,11 +16,11 @@ function enter(streak) {
     
     this.canvas.beginPath();
     this.canvas.moveTo(this.x, this.y);
-};
+}
 
 function exit(streak) {
     this.canvas.closePath();    
-};
+}
 
 exports.enter = enter;
 exports.exit = exit;

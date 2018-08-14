@@ -3,6 +3,7 @@
 //
 
 function enter(drawing) {
+    // stores the list values for all declared variables
     this.variables = {};
 }
 

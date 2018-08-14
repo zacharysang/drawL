@@ -11,7 +11,7 @@ const EXP = '^';
 function getVal(value) {
         
     if (value.VAR()) {
-        return parseInt(this.variables[value.VAR().getText()].shift());
+        return parseInt(this.streakVars[value.VAR().getText()].shift());
     } else if (value.NUMBER()) {
         return parseInt(value.NUMBER().getText());
     } else if (value.expression()) {

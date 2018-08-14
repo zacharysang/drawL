@@ -8,10 +8,10 @@ A streak will be defined by a starting point and then a pattern of succession
 
 /* Parser rules */
 drawing : (declaration)* (streak DELIM)+;
-streak : STREAK_KW location section*;
+streak : STREAK_KW location (COLON section)*;
 location : OPEN_PAREN NUMBER COMMA NUMBER CLOSE_PAREN;
-section : COLON value UNDERSCORE value (UNDERSCORE NUMBER)? (style)?; // <angle>-<magnitude>(-<iterations>)?
-declaration : OPEN_CURL VAR PIPE NUMBER ELLIPSIS NUMBER CLOSE_CURL;
+section : value UNDERSCORE value (UNDERSCORE NUMBER)? (style)?; // <angle>-<magnitude>(-<iterations>)?
+declaration : OPEN_CURL VAR PIPE NUMBER ELLIPSIS NUMBER CLOSE_CURL DELIM;
 style : OPEN_ANGLE COLOR (COMMA NUMBER)? CLOSE_ANGLE;
 
 value : (VAR|NUMBER|expression);
