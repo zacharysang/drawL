@@ -24,9 +24,12 @@ compileButton.onclick = () => {compile(inputEl.value)}
 
 // set the clear button
 let clearButton = document.getElementById(CLEAR_ID);
-clearButton.onclick = () => {canvasCtx.clearRect(0,0,canvas.width, canvas.height);console.clear()}
+clearButton.onclick = clearDrawing;
 
-
+function clearDrawing() {
+    canvas.setAttribute('style', '');
+    canvasCtx.clearRect(0,0,canvas.width, canvas.height);console.clear();
+}
 
 function compile(input) {
     let chars = new antlr.InputStream(input);
