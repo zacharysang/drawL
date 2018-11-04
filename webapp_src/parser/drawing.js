@@ -7,4 +7,9 @@ function enter(drawing) {
     this.variables = {};
 }
 
+function exit(drawing) {
+    console.log('drawing complete');
+}
+
 exports.enter = enter;
+exports.exit = exit;

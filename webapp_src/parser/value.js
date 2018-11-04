@@ -9,7 +9,7 @@ const DIV = '/';
 const EXP = '^';
 
 function getVal(value) {
-        
+
     if (value.VAR()) {
         return parseInt(this.streakVars[value.VAR().getText()].shift());
     } else if (value.NUMBER()) {

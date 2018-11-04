@@ -28,13 +28,24 @@ function enter(section) {
             
         let magnitude = VALUE.getVal.bind(this)(section.value()[1]);
         
+        let startX = this.x;
+        let startY = this.y;
+        
         this.x += Math.cos(angle) * magnitude;
         this.y += Math.sin(angle) * magnitude;
         
-        this.canvas.lineTo(this.x, this.y)
-        this.canvas.moveTo(this.x, this.y);
+        // create a new path from start to curr
+        let path = new Path2D();
+        path.moveTo(startX, startY);
+        path.lineTo(this.x, this.y);
         
-        this.canvas.stroke();    
+        if (this.delay) {
+            let canvas = this.canvas;
+            animate(this.delay, canvas, path);
+        } else {
+            this.canvas.stroke(path);
+        }
+        
     }
 }
 
@@ -61,6 +72,19 @@ function getVars(section) {
     }
     
     return vars;
+}
+
+let x = Promise.resolve();
+function animate(delay, canvas, path) {
+ x = x.then(() => {
+   return new Promise(resolve => {
+      setTimeout(() => {
+        // Here is where you'd actually interact with the canvas
+        canvas.stroke(path);
+        resolve();
+      }, delay /* animation delay (could even be random within a range! */);
+   });
+ });
 }
 
 exports.enter = enter;

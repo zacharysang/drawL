@@ -30,6 +30,7 @@ theDrawLListener.prototype.constructor = theDrawLListener;
 // override the listener functions (there is a listener for each parser rule)
 //
 theDrawLListener.prototype.enterDrawing = drawing.enter;
+theDrawLListener.prototype.exitDrawing = drawing.exit;
 
 theDrawLListener.prototype.enterStreak = streak.enter;
 theDrawLListener.prototype.exitStreak = streak.exit;

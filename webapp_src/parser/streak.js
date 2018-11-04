@@ -3,7 +3,7 @@
 //
 
 function enter(streak) {
-    // initialize variables for this streak
+    // make local copy of variables for this streak
     this.streakVars = {};
     for (let v in this.variables) {
         this.streakVars[v] = [...this.variables[v]];

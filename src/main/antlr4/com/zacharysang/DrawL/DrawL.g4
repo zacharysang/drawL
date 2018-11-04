@@ -12,7 +12,7 @@ streak : (style)? STREAK_KW location (COLON section)*;
 location : OPEN_PAREN NUMBER COMMA NUMBER CLOSE_PAREN;
 section : value COMMA value (COMMA NUMBER)?; // <angle>-<magnitude>(-<iterations>)?
 declaration : OPEN_CURL VAR PIPE NUMBER ELLIPSIS NUMBER CLOSE_CURL;
-style : OPEN_ANGLE COLOR (COMMA COLOR)? (COMMA NUMBER)? CLOSE_ANGLE;
+style : OPEN_ANGLE COLOR (COMMA COLOR)? (COMMA NUMBER)? (COMMA TIME)? CLOSE_ANGLE;
 
 value : (VAR|NUMBER|expression);
 expression : OPEN_PAREN OPERATOR COMMA value COMMA value CLOSE_PAREN;
@@ -27,11 +27,13 @@ fragment EXP : '^';
 
 // keywords
 STREAK_KW : '~';
+SECONDS_KW : 'ms';
 
 // primitive values
 NUMBER : [1-9][0-9]*; // one day we hope to support decimals...(but since the unit is pixels, this should be precise enough for now)
 COLOR : '#' HEX HEX HEX HEX HEX HEX;
 VAR : [a-zA-Z][a-zA-Z0-9]*;
+TIME: NUMBER SECONDS_KW;
 
 // operators
 OPERATOR : (PLUS|MINUS|MULT|DIV|EXP);
