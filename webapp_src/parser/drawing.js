@@ -8,7 +8,7 @@ function enter(drawing) {
 }
 
 function exit(drawing) {
-    console.log('drawing complete');
+    this.promise.then(() => console.log('drawing complete'));
 }
 
 exports.enter = enter;

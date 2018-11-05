@@ -16,6 +16,9 @@ function enter(streak) {
     
     this.canvas.beginPath();
     this.canvas.moveTo(this.x, this.y);
+    
+    // initialize streak's promise
+    this.promise = Promise.resolve();
 }
 
 function exit(streak) {

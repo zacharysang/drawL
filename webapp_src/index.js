@@ -28,7 +28,8 @@ clearButton.onclick = clearDrawing;
 
 function clearDrawing() {
     canvas.setAttribute('style', '');
-    canvasCtx.clearRect(0,0,canvas.width, canvas.height);console.clear();
+    canvasCtx.clearRect(0,0,canvas.width, canvas.height);
+    console.clear();
 }
 
 function compile(input) {

@@ -40,8 +40,7 @@ function enter(section) {
         path.lineTo(this.x, this.y);
         
         if (this.delay) {
-            let canvas = this.canvas;
-            animate(this.delay, canvas, path);
+            animate.bind(this)(path);
         } else {
             this.canvas.stroke(path);
         }
@@ -74,15 +73,16 @@ function getVars(section) {
     return vars;
 }
 
-let x = Promise.resolve();
-function animate(delay, canvas, path) {
- x = x.then(() => {
+function animate(path) {
+ this.promise = this.promise.then(() => {
    return new Promise(resolve => {
       setTimeout(() => {
-        // Here is where you'd actually interact with the canvas
-        canvas.stroke(path);
+        
+        // apply the path to the canvas
+        this.canvas.stroke(path);
         resolve();
-      }, delay /* animation delay (could even be random within a range! */);
+        
+      }, this.delay);
    });
  });
 }
