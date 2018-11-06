@@ -18,7 +18,7 @@ function enter(streak) {
     this.canvas.moveTo(this.x, this.y);
     
     // initialize streak's promise
-    this.promise = Promise.resolve();
+    window.promise = Promise.resolve();
 }
 
 function exit(streak) {

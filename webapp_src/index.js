@@ -14,6 +14,7 @@ let canvasCtx;
 if (canvas.getContext) {
     canvasCtx = canvas.getContext('2d');
 }
+window.animation = {cancel: null};
 
 // get the input
 let inputEl = document.getElementById(INPUT_ID);
@@ -30,6 +31,13 @@ function clearDrawing() {
     canvas.setAttribute('style', '');
     canvasCtx.clearRect(0,0,canvas.width, canvas.height);
     console.clear();
+    
+    // do nothing since we are purposely throwing an error to stop the animation
+    window.promise.catch(()=>{});
+    
+    // stop the animation
+    window.animation.cancel();
+    
 }
 
 function compile(input) {

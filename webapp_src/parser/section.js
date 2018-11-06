@@ -40,7 +40,7 @@ function enter(section) {
         path.lineTo(this.x, this.y);
         
         if (this.delay) {
-            animate.bind(this)(path);
+            animate.bind(this)(path, this.stopAnimation);
         } else {
             this.canvas.stroke(path);
         }
@@ -73,18 +73,22 @@ function getVars(section) {
     return vars;
 }
 
-function animate(path) {
- this.promise = this.promise.then(() => {
-   return new Promise(resolve => {
-      setTimeout(() => {
+function animate(path, stopAnimation) {
+    window.promise = window.promise.then(() => {
+        return new Promise((resolve, reject) => {
+      
+            // assign the reject function to the passed cancel token
+            window.animation.cancel = reject;
+       
+            setTimeout(() => {
         
-        // apply the path to the canvas
-        this.canvas.stroke(path);
-        resolve();
+                // apply the path to the canvas
+                this.canvas.stroke(path);
+                resolve();
         
-      }, this.delay);
-   });
- });
+            }, this.delay);
+        });
+    });
 }
 
 exports.enter = enter;
