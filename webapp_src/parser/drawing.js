@@ -3,12 +3,16 @@
 //
 
 function enter(drawing) {
-    // stores the list values for all declared variables
-    this.variables = {};
+  // stores the list values for all declared variables
+  this.variables = {};
+  
+  // initialie counter for streak ids
+  this.numStreaks = 0;
 }
 
 function exit(drawing) {
-    window.promise.then(() => console.log('drawing complete'));
+  let promises = Object.values(this.animations).map( (animation) => animation.promise);
+  Promise.all(promises).then(() => console.log('drawing complete'));
 }
 
 exports.enter = enter;
