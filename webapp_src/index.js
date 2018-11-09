@@ -3,16 +3,24 @@ const DrawLLexer = require('../target/generated-sources/antlr4/com/zacharysang/D
 const DrawLParser = require('../target/generated-sources/antlr4/com/zacharysang/DrawL/DrawLParser.js');
 const theDrawLListener = require('./theDrawLListener.js').theDrawLListener;
 
-const CANVAS_ID = 'test_canvas';
+const CANVAS_ID = 'drawL_canvas';
 const INPUT_ID = 'drawL_input';
 const COMPILE_ID = 'drawL_compile';
 const CLEAR_ID = 'drawL_clear';
 
+const DISPLAY_SIZE = {
+  width: window.innerWidth || document.body.clientWidth,
+  height: window.innerHeight || document.body.clientHeight
+}
+
 // initialize the animations object used as a map where each element contains info about the animation such as the promise and the cancel function
 let animations = {};
 
-// initialize the canvas handles
+// initialize the canvas (set size, get JS handles)
 let canvas = document.getElementById(CANVAS_ID);
+canvas.setAttribute('height', DISPLAY_SIZE.height);
+canvas.setAttribute('width', DISPLAY_SIZE.width);
+
 let canvasCtx;
 if (canvas.getContext) {
   canvasCtx = canvas.getContext('2d');
